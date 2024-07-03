@@ -28,19 +28,12 @@ class MainClass
 
             DataHandlerInstance.ParseData(args[0]);
 
-            if (DataHandlerInstance.ValidateData() == true)
+            foreach (int intValue in DataHandlerInstance.ValueArray)
             {
-                foreach (int intValue in DataHandlerInstance.ValueArray)
-                {
-                    CalculatorInstance.AddValue(intValue);
-                }
-                Console.WriteLine("Total value equals " + CalculatorInstance.CurrentValue.ToString());
+                CalculatorInstance.AddValue(intValue);
             }
-            else
-            {
-                Console.WriteLine("ERROR - Did not pass validation - " + DataHandlerInstance.ErrorMessage);
-            }
-            
+            Console.WriteLine("Total value equals " + CalculatorInstance.CurrentValue.ToString());
+           
             
     
         }
