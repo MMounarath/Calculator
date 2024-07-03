@@ -58,5 +58,15 @@ namespace TestCalculator
             Assert.AreEqual(handler.ValueArray[1], 2);
             Assert.AreEqual(handler.ValueArray[2], 3);        
         }
+
+        [TestMethod]
+        public void ParseData_CleanGreaterThan1000()
+        {
+            DataHandler handler = new DataHandler();
+            handler.ParseData("1,1001,3");
+            Assert.AreEqual(handler.ValueArray[0], 1);
+            Assert.AreEqual(handler.ValueArray[1], 0);
+            Assert.AreEqual(handler.ValueArray[2], 3);
+        }
     }
 }

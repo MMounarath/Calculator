@@ -34,14 +34,14 @@ public class DataHandler
         _intArrayValues = new int[strArrayValues.Length];
         for (int i = 0; i < strArrayValues.Length; i++)
         {
+            _intArrayValues[i] = 0;
             blnIsNumeric = int.TryParse(strArrayValues[i], out intTempValue);
             if (blnIsNumeric == true)
             {
-                _intArrayValues[i] = intTempValue;
-            }
-            else
-            {
-                _intArrayValues[i] = 0;
+                if (intTempValue <= 1000)
+                {
+                    _intArrayValues[i] = intTempValue;
+                }
             }
         }
 
