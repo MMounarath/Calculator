@@ -23,14 +23,21 @@
                 }
             }
 
-            DataHandlerInstance.ParseData(args[0]);
-
-            foreach (int intValue in DataHandlerInstance.ValueArray)
+            try
             {
-                CalculatorInstance.AddValue(intValue);
+                DataHandlerInstance.ParseData(args[0]);
+                DataHandlerInstance.ValidateData();
+
+                foreach (int intValue in DataHandlerInstance.ValueArray)
+                {
+                    CalculatorInstance.AddValue(intValue);
+                }
+                Console.WriteLine("Total value equals " + CalculatorInstance.CurrentValue.ToString());
             }
-            Console.WriteLine("Total value equals " + CalculatorInstance.CurrentValue.ToString());
-           
+            catch (Exception e)
+            {
+                Console.WriteLine("Error - " + e.Message);
+            }
             
     
         }
