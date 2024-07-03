@@ -28,9 +28,8 @@ public class DataHandler
     {
         bool blnIsNumeric;
         int intTempValue;
-        string[] strArrayDelimiters = { ",", "\\n" };
 
-        string[] strArrayValues = strCSV.Split(strArrayDelimiters, StringSplitOptions.None);
+        string[] strArrayValues = strCSV.Split(',');
         _intArrayValues = new int[strArrayValues.Length];
         for (int i = 0; i < strArrayValues.Length; i++)
         {

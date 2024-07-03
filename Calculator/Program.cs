@@ -1,4 +1,7 @@
-﻿class MainClass
+﻿using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
+
+class MainClass
 {
     
     static void Main(string[] args)
@@ -9,7 +12,7 @@
 
         if (args.Length == 0)
         {
-            Console.WriteLine("Calculator [delimited numbers]");
+            Console.WriteLine("Calculator [comma-delimited numbers]");
         }
         else
         {
