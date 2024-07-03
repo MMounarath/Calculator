@@ -48,17 +48,16 @@ public class DataHandler
 
     }
 
-    public bool ValidateData()
+    public void ValidateData()
     {
-        bool blnReturnValue = true;
 
-        if (_intArrayValues.Length > 2)
+        foreach (int intValue in _intArrayValues)
         {
-            blnReturnValue = false;
-            _strErrorMessage = "More than 2 values";
+            if (intValue < 0)
+            {
+                throw new Exception("Negative value found");
+            }
         }
-
-        return blnReturnValue;
     }
 
 }

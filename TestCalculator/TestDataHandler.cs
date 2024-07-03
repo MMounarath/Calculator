@@ -5,20 +5,20 @@ namespace TestCalculator
     public class TestDataHandler
     {
         [TestMethod]
-        public void ValidateData_PassingValues()
+        public void ValidateData_NegativeValueThrowException()
         {
             DataHandler handler = new DataHandler();
-            handler.ParseData("1,2");
-            Assert.AreEqual(handler.ValidateData(), true);
-        }
-
-        [TestMethod]
-        public void ValidateData_NonPassingValues()
-        {
-            DataHandler handler = new DataHandler();
-            handler.ParseData("1,2,");
-            handler.ValidateData();
-            Assert.AreEqual(handler.ValidateData(), false);
+            handler.ParseData("1,-1");
+            try
+            {
+                handler.ValidateData();
+                Assert.Fail("Failed to throw exception on negative value");
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual(e.Message, "Negative value found");
+            }
+            
         }
 
         [TestMethod]
