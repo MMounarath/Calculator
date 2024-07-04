@@ -28,11 +28,16 @@
                 DataHandlerInstance.ParseData(args[0]);
                 DataHandlerInstance.ValidateData();
 
-                foreach (int intValue in DataHandlerInstance.ValueArray)
+                for (int i = 0; i < DataHandlerInstance.ValueArray.Length; i++)
                 {
-                    CalculatorInstance.AddValue(intValue);
+                    CalculatorInstance.AddValue(DataHandlerInstance.ValueArray[i]);
+                    Console.Write(DataHandlerInstance.ValueArray[i].ToString());
+                    if (i != (DataHandlerInstance.ValueArray.Length - 1))
+                    {
+                        Console.Write("+");
+                    }
                 }
-                Console.WriteLine("Total value equals " + CalculatorInstance.CurrentValue.ToString());
+                Console.WriteLine(" = " + CalculatorInstance.CurrentValue.ToString());
             }
             catch (Exception e)
             {
