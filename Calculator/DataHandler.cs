@@ -9,11 +9,11 @@ public class DataHandler
 {
     int[] _intArrayValues = null;
     string _strErrorMessage = null;
-    string _strCustomDelimeter = null;
+    string[] _strCustomDelimeters = null;
 
-    public string CustomDelimeter
+    public string[] CustomDelimeters
     {
-        get { return _strCustomDelimeter; }
+        get { return _strCustomDelimeters; }
     }
 
     public int[] ValueArray
@@ -31,7 +31,7 @@ public class DataHandler
 
     }
 
-    public bool CheckCustomDelimeter(string strValue)
+    public bool CheckCustomDelimeters(string strValue)
     {
         bool blnDelimeterFound = false;
 
@@ -42,10 +42,12 @@ public class DataHandler
         {
             var regex = new Regex("\\[(.*?)\\]");
             var matches = regex.Matches(strValue);
+            
+            _strCustomDelimeters = new string[matches.Count];
 
-            if (matches.Count > 0)
+            for (int i = 0; i < matches.Count; i++)
             {
-                _strCustomDelimeter = matches[0].Groups[1].Value; // name, name@gmail.com
+                _strCustomDelimeters[i] = matches[i].Groups[1].Value; 
                 blnDelimeterFound = true;
             }
 
@@ -61,10 +63,13 @@ public class DataHandler
         string[] strArrayDelimiters = { ",", "\\n" };
         string[] strArrayValues = strCSV.Split(strArrayDelimiters, StringSplitOptions.None);
         
-        if (CheckCustomDelimeter(strArrayValues[0]) == true)
+        if (CheckCustomDelimeters(strArrayValues[0]) == true)
         {
-            strArrayDelimiters = new string[3] { ",", "\\n", _strCustomDelimeter };
-            strCSV = strCSV.Remove(0, _strCustomDelimeter.Length + 6);
+            strArrayDelimiters = new string[_strCustomDelimeters.Length + 2];
+            _strCustomDelimeters.CopyTo(strArrayDelimiters, 0);
+            strArrayDelimiters[_strCustomDelimeters.Length] = ",";
+            strArrayDelimiters[_strCustomDelimeters.Length + 1] = "\\n";
+            strCSV = strCSV.Remove(0, strArrayValues[0].Length + 2);
             strArrayValues = strCSV.Split(strArrayDelimiters, StringSplitOptions.None);
         }
         _intArrayValues = new int[strArrayValues.Length];
