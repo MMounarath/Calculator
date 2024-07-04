@@ -25,8 +25,8 @@ namespace TestCalculator
         public void CheckCustomDelimter()
         {
             DataHandler handler = new DataHandler();
-            handler.CheckCustomDelimeter("//#");
-            Assert.AreEqual(handler.CustomDelimeter, '#');
+            handler.CheckCustomDelimeter("//[###]");
+            Assert.AreEqual(handler.CustomDelimeter, "###");
         }
 
         [TestMethod]
@@ -43,10 +43,11 @@ namespace TestCalculator
         public void ParseData_WithCustomDelimeter()
         {
             DataHandler handler = new DataHandler();
-            handler.ParseData("//#\\n2#5");
-            Assert.AreEqual(handler.CustomDelimeter, '#');
-            Assert.AreEqual(handler.ValueArray[0], 2);
-            Assert.AreEqual(handler.ValueArray[1], 5);
+            handler.ParseData("//[***]\\n11***22***33");
+            Assert.AreEqual(handler.CustomDelimeter, "***");
+            Assert.AreEqual(handler.ValueArray[0], 11);
+            Assert.AreEqual(handler.ValueArray[1], 22);
+            Assert.AreEqual(handler.ValueArray[2], 33);
         }
 
 
